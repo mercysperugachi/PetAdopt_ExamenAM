@@ -10,6 +10,7 @@ interface MascotasState {
   error: string | null;
   fetchMascotasDelRefugio: (refugioId: string) => Promise<void>;
   agregarMascota: (mascota: Omit<Mascota, 'id' | 'imagenUrl'>, imageUri: string) => Promise<boolean>;
+  fetchAllMascotas: () => Promise<void>;
 }
 
 export const useMascotasStore = create<MascotasState>((set, get) => ({
@@ -40,4 +41,8 @@ export const useMascotasStore = create<MascotasState>((set, get) => ({
       return false;
     }
   }
+
+
+    // Y añade la implementación dentro del create<MascotasState>:
+
 }));

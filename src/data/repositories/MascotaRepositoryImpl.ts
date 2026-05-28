@@ -73,4 +73,25 @@ export class MascotaRepositoryImpl {
       refugioId: item.refugio_id,
     }));
   }
+
+  // 4. Obtiene todas las mascotas disponibles para el feed de adoptantes
+  async getMascotasDisponibles(): Promise<Mascota[]> {
+    const { data, error } = await supabase
+      .from('mascotas')
+      .select('*')
+      .eq('estado', 'disponible')
+      .order('id', { ascending: false });
+
+    if (error) throw error;
+
+    return data.map((item: any) => ({
+      id: item.id,
+      nombre: item.nombre,
+      tipo: item.especie,
+      edad: item.edad,
+      descripcion: item.descripcion,
+      imagenUrl: item.imagen_url,
+      refugioId: item.refugio_id,
+    }));
+  }
 }
